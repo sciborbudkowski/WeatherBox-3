@@ -1,0 +1,24 @@
+PODS:
+  - Elephant (0.1.0)
+  - PanModal (1.2.7)
+  - SwiftLint (0.46.2)
+
+DEPENDENCIES:
+  - Elephant
+  - PanModal
+  - SwiftLint
+
+SPEC REPOS:
+  trunk:
+    - Elephant
+    - PanModal
+    - SwiftLint
+
+SPEC CHECKSUMS:
+  Elephant: 66d92a5e621da1461fe44189dcbfdcabbd7358c4
+  PanModal: 3e16ead1a907fb06f4df3f13492fd00149fa4974
+  SwiftLint: 6bc52a21f0fd44cab9aa2dc8e534fb9f5e3ec507
+
+PODFILE CHECKSUM: bfc2587c96856580cdd72faeefa5f5048011b776
+
+COCOAPODS: 1.11.2
