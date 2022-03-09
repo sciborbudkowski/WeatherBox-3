@@ -2,32 +2,90 @@ import Foundation
 
 // https://api.openweathermap.org/data/2.5/onecall?lat=52.24101385689496&lon=21.015219&appid=1267ccba117cbc3938e51a0386683f80&units=metric&exclude=minutely
 
-struct Weather: Codable {
-    let sunrise: Int
-    let sunset: Int
-    let temperature: Double
-    let feelsLike: Double
-    let pressure: Int
-    let humidity: Int
-    let uvi: Double
-    let clouds: Int
-    let visibility: Int
-    let windSpeed: Int
-    let windDegree: Int
-    let windGust: Int
-    let weather: [WeatherDetails]
+struct WeatherModel: Codable {
+    var timezone: String
+    var timezoneOffset: Int
+    var current: WeatherCurrent
+    var hourly: [WeatherHourly]
+    var daily: [WeatherDaily]
 }
 
-struct WeatherDetails: Codable {
-    let name: String
+struct WeatherCurrent: Codable {
+    var dt: Int
+    var temp: Double
+    var humidity: Int
+    var sunrise: Int
+    var sunset: Int
+    var uvi: Double
+    var windDeg: Int
+    var feelsLike: Double
+    var clouds: Int
+    var visibility: Int
+    var windSpeed: Double
+    var pressure: Int
+    var weather: [WeatherDetail]
+}
+
+struct WeatherDetail: Codable {
+    var id: Int
+    var main: String
+    var description: String
+}
+
+struct WeatherDaily: Codable {
+    var dt: Int
+    var temp: Temperatures
+    var humidity: Int
+    var sunrise: Int
+    var sunset: Int
+    var moonrise: Int
+    var moonset: Int
+    var uvi: Double
+    var moonPhase: Double
+    var windDeg: Int
+    var windGust: Double
+    var feelsLike: FeelLikes
+    var weather: [WeatherDetail]
+    var windSpeed: Double
+    var pressure: Int
+    var clouds: Int
+    var pop: Double
 }
 
 struct WeatherHourly: Codable {
-    let hourly: [Weather]
+    var dt: Int
+    var temp: Double
+    var feelsLike: Double
+    var pressure: Int
+    var humidity: Double
+    var uvi: Double
+    var clouds: Int
+    var visibility: Int
+    var windSpeed: Double
+    var windDeg: Double
+    var windGust: Double
+    var weather: [WeatherDetail]
+    var pop: Double
 }
 
-struct WeatherRequest: Request {
-    typealias ReturnType = Weather
+struct Temperatures: Codable {
+    var night: Double
+    var min: Double
+    var eve: Double
+    var day: Double
+    var max: Double
+    var morn: Double
+}
+
+struct FeelLikes: Codable {
+    var night: Double
+    var eve: Double
+    var day: Double
+    var morn: Double
+}
+
+struct Weather: Request {
+    typealias ReturnType = WeatherModel
     var path: String = "/data/2.5/onecall"
     var queryParams: [String : String]? = [:]
 
@@ -43,7 +101,8 @@ struct WeatherRequest: Request {
             "lat": latitude,
             "lon": longitude,
             "units": Settings.shared.temperatureUnit,
-            "lang": Settings.shared.languageCode
+            "lang": Settings.shared.languageCode,
+            "exclude": "minutely"
         ]
     }
 }

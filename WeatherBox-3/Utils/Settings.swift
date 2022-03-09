@@ -82,4 +82,24 @@ class Settings {
             }
         }
     }
+
+    var speedUnit: String {
+        get {
+            if Locale.current.usesMetricSystem {
+                return " km/h"
+            } else {
+                return " miles/h"
+            }
+        }
+    }
+
+    var temperatureSign: String {
+        get {
+            if UnitTemperature.current == .celsius {
+                return " °C"
+            } else {
+                return " °F"
+            }
+        }
+    }
 }

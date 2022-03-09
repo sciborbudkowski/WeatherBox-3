@@ -2,7 +2,7 @@ import UIKit
 
 class TableCell: UITableViewCell {
 
-    public static let identifier = String(describing: self)
+    static let identifier = String(describing: self)
 
     func setupProperties() {
     }

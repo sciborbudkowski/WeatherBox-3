@@ -7,4 +7,15 @@ class Colors {
 
     static let mainBackgroundColor = UIColor(240, 240, 240)
     static let separatorColor = UIColor(245, 245, 245)
+
+    static let temperatureDayTextColor = UIColor(150, 150, 150)
+    static let temperatureNightTextColor = UIColor(80, 80, 80)
+
+    static func getDailyCellBackgroundColor(_ value: Int) -> UIColor {
+        if value % 2 == 0 {
+            return UIColor(245, 245, 245)
+        }
+
+        return UIColor(255, 255, 255)
+    }
 }

@@ -30,10 +30,11 @@ struct NetworkDispatcher {
                    !(200...299).contains(response.statusCode) {
                     throw httpError(response.statusCode)
                 }
+                // print(data.prettyJSON ?? "")
 
                 return data
             })
-            .decode(type: ReturnType.self, decoder: JSONDecoder())
+            .decode(type: ReturnType.self, decoder: SnakeCaseJSONDecoder())
             .mapError { error in
                 handleError(error)
             }
@@ -57,6 +58,7 @@ extension NetworkDispatcher {
     }
 
     private func handleError(_ error: Error) -> NetworkRequestError {
+        print(error.localizedDescription)
         switch error {
         case is Swift.DecodingError: return .decodingError
         case let urlError as URLError: return .urlSessionFailed(urlError)
