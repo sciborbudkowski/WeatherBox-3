@@ -96,6 +96,8 @@
 		30476F8F27C51A2300AF19B5 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30476F8E27C51A2300AF19B5 /* Settings.swift */; };
 		30476F9327C51BE900AF19B5 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30476F9227C51BE900AF19B5 /* Weather.swift */; };
 		30476F9527C51C9200AF19B5 /* UnitTemperature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30476F9427C51C9200AF19B5 /* UnitTemperature.swift */; };
+		307BD10327DA1E7100BD6871 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307BD10227DA1E7100BD6871 /* Double.swift */; };
+		307BD10527DA279600BD6871 /* Aqi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307BD10427DA279600BD6871 /* Aqi.swift */; };
 		3098703227BBA3A900985015 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3098703127BBA3A900985015 /* AppDelegate.swift */; };
 		3098703627BBA3A900985015 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3098703527BBA3A900985015 /* MainViewController.swift */; };
 		3098703B27BBA3AA00985015 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3098703A27BBA3AA00985015 /* Assets.xcassets */; };
@@ -211,6 +213,8 @@
 		30476F8E27C51A2300AF19B5 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		30476F9227C51BE900AF19B5 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		30476F9427C51C9200AF19B5 /* UnitTemperature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTemperature.swift; sourceTree = "<group>"; };
+		307BD10227DA1E7100BD6871 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
+		307BD10427DA279600BD6871 /* Aqi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aqi.swift; sourceTree = "<group>"; };
 		3098702E27BBA3A900985015 /* WeatherBox-3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WeatherBox-3.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3098703127BBA3A900985015 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3098703527BBA3A900985015 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -324,7 +328,6 @@
 				30476F6827C4FC2A00AF19B5 /* Sun&Moon */,
 				30476F3527C4FB6E00AF19B5 /* Wind */,
 				30476F3427C4FB6600AF19B5 /* AQI */,
-				30476F3327C4FB5900AF19B5 /* BeaufortScale */,
 				30476F3227C4FB4F00AF19B5 /* UVIndex */,
 				30476F3127C4FB4300AF19B5 /* Pressure */,
 				30476F3027C4FB2D00AF19B5 /* Weather */,
@@ -385,13 +388,6 @@
 				30476F5A27C4FBB200AF19B5 /* uv-index.svg */,
 			);
 			path = UVIndex;
-			sourceTree = "<group>";
-		};
-		30476F3327C4FB5900AF19B5 /* BeaufortScale */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = BeaufortScale;
 			sourceTree = "<group>";
 		};
 		30476F3427C4FB6600AF19B5 /* AQI */ = {
@@ -511,6 +507,7 @@
 				30476F9427C51C9200AF19B5 /* UnitTemperature.swift */,
 				30C5C9C227D8ACBB0043141D /* Data.swift */,
 				30C5C9C427D8AF560043141D /* JSONDecoder.swift */,
+				307BD10227DA1E7100BD6871 /* Double.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -530,6 +527,7 @@
 			children = (
 				30C5C9C727D8BEBC0043141D /* WeatherIcons.swift */,
 				30476F9227C51BE900AF19B5 /* Weather.swift */,
+				307BD10427DA279600BD6871 /* Aqi.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -758,6 +756,7 @@
 				30C5C9C827D8BEBC0043141D /* WeatherIcons.swift in Sources */,
 				3028171027BE91A200CFFC0B /* Colors.swift in Sources */,
 				3098703627BBA3A900985015 /* MainViewController.swift in Sources */,
+				307BD10527DA279600BD6871 /* Aqi.swift in Sources */,
 				30C5C9CF27D8CAF30043141D /* HourlyViewCell.swift in Sources */,
 				30476F9327C51BE900AF19B5 /* Weather.swift in Sources */,
 				3098703227BBA3A900985015 /* AppDelegate.swift in Sources */,
@@ -780,6 +779,7 @@
 				30C5C9BE27D8A4680043141D /* NetworkDispatcher.swift in Sources */,
 				30C5C9C327D8ACBB0043141D /* Data.swift in Sources */,
 				30476F9527C51C9200AF19B5 /* UnitTemperature.swift in Sources */,
+				307BD10327DA1E7100BD6871 /* Double.swift in Sources */,
 				3098704C27BBA5CA00985015 /* UIColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

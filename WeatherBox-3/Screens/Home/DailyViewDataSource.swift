@@ -2,16 +2,19 @@ import UIKit
 
 struct DailyViewModel {
     var icon: String
-    var sunrise: Int
-    var sunset: Int
-    var moonrise: Int
-    var moonset: Int
+    var sunrise: String
+    var sunset: String
+    var moonrise: String
+    var moonset: String
     var moonPhase: Double
     var temperatures: Temperatures
     var pressure: Int
     var windSpeed: Double
     var weather: WeatherDetail
     var pop: Double
+    var weekday: String
+    var date: String
+    var windIcon: String
 }
 
 class DailyViewDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {

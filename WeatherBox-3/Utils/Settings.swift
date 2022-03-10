@@ -83,12 +83,22 @@ class Settings {
         }
     }
 
+    var speedMultiplier: Double {
+        get {
+            if temperatureUnit == "metric" {
+                return 3.6
+            } else {
+                return 1.0
+            }
+        }
+    }
+
     var speedUnit: String {
         get {
             if Locale.current.usesMetricSystem {
                 return " km/h"
             } else {
-                return " miles/h"
+                return " mph"
             }
         }
     }

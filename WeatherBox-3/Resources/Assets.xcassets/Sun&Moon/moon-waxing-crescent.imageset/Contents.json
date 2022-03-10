@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "moon-waxing-crescent.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -5,16 +5,7 @@ class HourlyViewCell: CollectionCell {
 
     var model: HourlyItemModel?
 
-    private var weatherIcon: SVGView?
-
-    private var weatherIconName: String? {
-        didSet {
-            if let name = weatherIconName {
-                weatherIcon = SVGView(named: name, animationOwner: .svg)
-                setupLayoutContraints()
-            }
-        }
-    }
+    private var weatherIcon = UIImageView()
 
     private let hSeparator1: UIView = {
         let view = UIView()
@@ -47,14 +38,12 @@ class HourlyViewCell: CollectionCell {
     func configure(with model: HourlyItemModel) {
         self.model = model
 
-        weatherIconName = model.icon
+        weatherIcon.image = UIImage(named: "Weather/\(model.icon)")
         dateLabel.text = model.hour
-        temperatureLabel.text = String(format: "%0.f", model.temperature).appending(Settings.shared.temperatureSign)
+        temperatureLabel.text = model.temperature.asTemperatureString()
     }
 
     override func setupLayoutContraints() {
-        guard let weatherIcon = weatherIcon else { return }
-
         contentView.addSubviews([dateLabel, hSeparator2, weatherIcon, hSeparator1, temperatureLabel])
 
         dateLabel.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
@@ -65,6 +54,7 @@ class HourlyViewCell: CollectionCell {
         hSeparator2.heightAnchor.constraint(equalToConstant: 2).isActive = true
 
         weatherIcon.topAnchor.constraint(equalTo: hSeparator2.bottomAnchor, constant: 5).isActive = true
+        weatherIcon.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         weatherIcon.widthAnchor.constraint(equalToConstant: 35).isActive = true
         weatherIcon.heightAnchor.constraint(equalToConstant: 35).isActive = true
 

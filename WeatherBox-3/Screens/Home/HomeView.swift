@@ -12,10 +12,14 @@ class HomeView: View {
     }()
 
     private let dateLabel: UILabel = {
+        let df = DateFormatter()
+        df.dateStyle = .long
+        df.timeStyle = .none
+        df.locale = Locale.current
         let label = UILabel()
         label.font = UIFont.getDefaultFont(.light, ofSize: 12)
         label.textColor = Colors.secondaryTextColor
-        label.text = Date.now.formatted(date: .long, time: .omitted)
+        label.text = df.string(from: Date())
         return label
     }()
 
@@ -28,21 +32,15 @@ class HomeView: View {
     }()
 
     private var weatherIcon: SVGView?
-
-    var weatherIconName: String? {
-        didSet {
-            if let name = weatherIconName {
-                weatherIcon = SVGView(named: name, animationOwner: .svg)
-                setupConstraints()
-            }
-        }
-    }
+    private var windIcon: SVGView?
+    private var uvIcon: SVGView?
 
     var weatherNameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.getDefaultFont(.regular, ofSize: 30)
         label.textColor = Colors.secondaryTextColor
         label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
         label.text = ""
         return label
     }()
@@ -119,21 +117,80 @@ class HomeView: View {
         return view
     }()
 
-    var hourlyView = HourlyView()
+    private let beaufortLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.getDefaultFont(.light, ofSize: 12)
+        label.textColor = Colors.secondaryTextColor
+        label.text = "skala Beauforta"
+        return label
+    }()
 
+    private let uvIndexLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.getDefaultFont(.light, ofSize: 12)
+        label.textColor = Colors.secondaryTextColor
+        label.text = "index UV"
+        return label
+    }()
+
+    private var aqiIcon: SVGView?
+    private var moonPhaseIcon: SVGView?
+
+    private let aqiLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.getDefaultFont(.light, ofSize: 12)
+        label.textColor = Colors.secondaryTextColor
+        label.text = "jakość powietrza"
+        return label
+    }()
+
+    private let moonPhaseLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.getDefaultFont(.light, ofSize: 12)
+        label.textColor = Colors.secondaryTextColor
+        label.text = "faza Księżyca"
+        return label
+    }()
+
+    var alertIcon: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "alert-icon")
+        view.isHidden = true
+        return view
+    }()
+
+    var hourlyView = HourlyView()
     var dailyView = DailyView()
 
+    func setWeatherIcons(weather: String, wind: String, uvIndex: String, moonIcon: String) {
+        weatherIcon = SVGView(named: weather, animationOwner: .svg)
+        windIcon = SVGView(named: wind, animationOwner: .svg)
+        uvIcon = SVGView(named: uvIndex, animationOwner: .svg)
+        moonPhaseIcon = SVGView(named: moonIcon, animationOwner: .svg)
+    }
+
+    func setAqiIcon(aqi: String) {
+        aqiIcon = SVGView(named: aqi, animationOwner: .svg)
+    }
+
     override func setupConstraints() {
-        guard let weatherIcon = weatherIcon else { return }
+        guard let weatherIcon = weatherIcon,
+              let windIcon = windIcon,
+              let uvIcon = uvIcon,
+              let aqiIcon = aqiIcon,
+              let moonPhaseIcon = moonPhaseIcon else { return }
 
         addSubviews([dayNameLabel, dateLabel, placeNameLabel,
                      weatherIcon, weatherNameLabel,
+                     windIcon, uvIcon, beaufortLabel, uvIndexLabel,
+                     aqiIcon, aqiLabel, moonPhaseIcon, moonPhaseLabel,
                      vSeparator1, vSeparator2,
                      wind, temperature, humidity,
                      hSeparator1,
                      vSeparator3, vSeparator4,
                      pressure, feelsLike, uvIndex,
-                     hourlyView, dailyView])
+                     hourlyView, dailyView,
+                     alertIcon])
 
         dayNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 60).isActive = true
         dayNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
@@ -149,7 +206,39 @@ class HomeView: View {
         weatherIcon.widthAnchor.constraint(equalToConstant: 150).isActive = true
         weatherIcon.heightAnchor.constraint(equalToConstant: 150).isActive = true
 
-        weatherNameLabel.topAnchor.constraint(equalTo: weatherIcon.bottomAnchor).isActive = true
+        windIcon.trailingAnchor.constraint(equalTo: weatherIcon.leadingAnchor, constant: -20).isActive = true
+        windIcon.topAnchor.constraint(equalTo: placeNameLabel.bottomAnchor).isActive = true
+        windIcon.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        windIcon.heightAnchor.constraint(equalToConstant: 50).isActive = true
+
+        beaufortLabel.topAnchor.constraint(equalTo: windIcon.bottomAnchor, constant: 5).isActive = true
+        beaufortLabel.centerXAnchor.constraint(equalTo: windIcon.centerXAnchor).isActive = true
+
+        aqiIcon.trailingAnchor.constraint(equalTo: weatherIcon.leadingAnchor, constant: -20).isActive = true
+        aqiIcon.topAnchor.constraint(equalTo: beaufortLabel.bottomAnchor, constant: 10).isActive = true
+        aqiIcon.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        aqiIcon.heightAnchor.constraint(equalToConstant: 50).isActive = true
+
+        aqiLabel.topAnchor.constraint(equalTo: aqiIcon.bottomAnchor, constant: 5).isActive = true
+        aqiLabel.centerXAnchor.constraint(equalTo: aqiIcon.centerXAnchor).isActive = true
+
+        uvIcon.leadingAnchor.constraint(equalTo: weatherIcon.trailingAnchor, constant: 20).isActive = true
+        uvIcon.topAnchor.constraint(equalTo: placeNameLabel.bottomAnchor).isActive = true
+        uvIcon.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        uvIcon.heightAnchor.constraint(equalToConstant: 50).isActive = true
+
+        uvIndexLabel.topAnchor.constraint(equalTo: uvIcon.bottomAnchor, constant: 5).isActive = true
+        uvIndexLabel.centerXAnchor.constraint(equalTo: uvIcon.centerXAnchor).isActive = true
+
+        moonPhaseIcon.leadingAnchor.constraint(equalTo: weatherIcon.trailingAnchor, constant: 20).isActive = true
+        moonPhaseIcon.topAnchor.constraint(equalTo: uvIndexLabel.bottomAnchor, constant: 10).isActive = true
+        moonPhaseIcon.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        moonPhaseIcon.heightAnchor.constraint(equalToConstant: 50).isActive = true
+
+        moonPhaseLabel.topAnchor.constraint(equalTo: moonPhaseIcon.bottomAnchor, constant: 5).isActive = true
+        moonPhaseLabel.centerXAnchor.constraint(equalTo: moonPhaseIcon.centerXAnchor).isActive = true
+
+        weatherNameLabel.topAnchor.constraint(equalTo: weatherIcon.bottomAnchor, constant: 10).isActive = true
         weatherNameLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         weatherNameLabel.widthAnchor.constraint(equalTo: widthAnchor, constant: -40).isActive = true
 
@@ -205,5 +294,10 @@ class HomeView: View {
         dailyView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
         dailyView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
         dailyView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+
+        alertIcon.bottomAnchor.constraint(equalTo: weatherIcon.bottomAnchor, constant: -10).isActive = true
+        alertIcon.trailingAnchor.constraint(equalTo: weatherIcon.trailingAnchor, constant: -10).isActive = true
+        alertIcon.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        alertIcon.heightAnchor.constraint(equalToConstant: 60).isActive = true
     }
 }

@@ -1,13 +1,12 @@
 import Foundation
 
-// https://api.openweathermap.org/data/2.5/onecall?lat=52.24101385689496&lon=21.015219&appid=1267ccba117cbc3938e51a0386683f80&units=metric&exclude=minutely
-
 struct WeatherModel: Codable {
     var timezone: String
     var timezoneOffset: Int
     var current: WeatherCurrent
     var hourly: [WeatherHourly]
     var daily: [WeatherDaily]
+    var alerts: [WeatherAlert]?
 }
 
 struct WeatherCurrent: Codable {
@@ -82,6 +81,14 @@ struct FeelLikes: Codable {
     var eve: Double
     var day: Double
     var morn: Double
+}
+
+struct WeatherAlert: Codable {
+    var senderName: String
+    var event: String
+    var start: Int
+    var end: Int
+    var description: String
 }
 
 struct Weather: Request {

@@ -56,3 +56,53 @@ let weatherIcons: [Int: String] = [
     803: "weather_brokenClouds-%",
     804: "weather_overcastClouds-%"
 ]
+
+let beaufortIcons: [Int: String] = [
+    0: "wind-beaufort-0",
+    1: "wind-beaufort-1",
+    2: "wind-beaufort-2",
+    3: "wind-beaufort-3",
+    4: "wind-beaufort-4",
+    5: "wind-beaufort-5",
+    6: "wind-beaufort-6",
+    7: "wind-beaufort-7",
+    8: "wind-beaufort-8",
+    9: "wind-beaufort-9",
+    10: "wind-beaufort-10",
+    11: "wind-beaufort-11",
+    12: "wind-beaufort-12"
+]
+
+let uvIcons: [Int: String] = [
+    0: "uv-index",
+    1: "uv-index-1",
+    2: "uv-index-2",
+    3: "uv-index-3",
+    4: "uv-index-4",
+    5: "uv-index-5",
+    6: "uv-index-6",
+    7: "uv-index-7",
+    8: "uv-index-8",
+    9: "uv-index-9",
+    10: "uv-index-10",
+    11: "uv-index-11"
+]
+
+let moonIcons: [Int: String] = [
+    0: "moon-new",
+    1: "moon-waxing-crescent",
+    2: "moon-first-quarter",
+    3: "moon-waxing-gibbous",
+    4: "moon-full",
+    5: "moon-waning-gibous",
+    6: "moon-last-quarter",
+    7: "moon-waning-crescent"
+]
+
+let aqiIcons: [Int: String] = [
+    1: "pm1",
+    2: "pm2",
+    3: "pm3",
+    4: "pm4",
+    5: "pm5"
+]
