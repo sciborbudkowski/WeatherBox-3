@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		30022A5227BE5D4F002CF248 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30022A5127BE5D4F002CF248 /* Secrets.swift */; };
 		30022A5627BE67FF002CF248 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30022A5527BE67FF002CF248 /* LocationService.swift */; };
+		30073DAE27DF404400349578 /* AQIIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30073DAD27DF404400349578 /* AQIIcons.swift */; };
 		302816EA27BE8C4900CFFC0B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302816E927BE8C4900CFFC0B /* HomeView.swift */; };
 		302816FD27BE8D6400CFFC0B /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 302816FC27BE8D5300CFFC0B /* Nunito-Bold.ttf */; };
 		302816FE27BE8D6400CFFC0B /* Nunito-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 302816F127BE8D5300CFFC0B /* Nunito-BlackItalic.ttf */; };
@@ -126,6 +127,7 @@
 /* Begin PBXFileReference section */
 		30022A5127BE5D4F002CF248 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		30022A5527BE67FF002CF248 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		30073DAD27DF404400349578 /* AQIIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AQIIcons.swift; sourceTree = "<group>"; };
 		302816E927BE8C4900CFFC0B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		302816ED27BE8D5300CFFC0B /* Nunito-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
 		302816EE27BE8D5300CFFC0B /* Nunito-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
@@ -528,6 +530,7 @@
 				30C5C9C727D8BEBC0043141D /* WeatherIcons.swift */,
 				30476F9227C51BE900AF19B5 /* Weather.swift */,
 				307BD10427DA279600BD6871 /* Aqi.swift */,
+				30073DAD27DF404400349578 /* AQIIcons.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -750,6 +753,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30073DAE27DF404400349578 /* AQIIcons.swift in Sources */,
 				30C5C9D927D8EE3D0043141D /* DailyViewCell.swift in Sources */,
 				302816EA27BE8C4900CFFC0B /* HomeView.swift in Sources */,
 				30476F8C27C5038E00AF19B5 /* TextValueLabel.swift in Sources */,

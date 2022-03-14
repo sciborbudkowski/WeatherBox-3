@@ -123,6 +123,49 @@ class DailyViewCell: TableCell {
 
     private var windIcon = UIImageView()
 
+    private let moonInfoStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .vertical
+        view.alignment = .center
+        view.distribution = .fillProportionally
+        return view
+    }()
+
+    private let moonriseStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.alignment = .center
+        view.distribution = .fill
+        return view
+    }()
+
+    private let moonsetStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.alignment = .center
+        view.distribution = .fill
+        return view
+    }()
+
+    private let moonriseIcon = UIImageView(image: UIImage(named: "Sun&Moon/moonrise"))
+    private let moonsetIcon = UIImageView(image: UIImage(named: "Sun&Moon/moonset"))
+
+    private var moonriseTimeLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.getDefaultFont(.italic, ofSize: 12)
+        label.textColor = Colors.primaryTextColor
+        label.text = ""
+        return label
+    }()
+
+    private var moonsetTimeLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.getDefaultFont(.italic, ofSize: 12)
+        label.textColor = Colors.primaryTextColor
+        label.text = ""
+        return label
+    }()
+
     private var windLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.getDefaultFont(.regular, ofSize: 12)
@@ -130,6 +173,8 @@ class DailyViewCell: TableCell {
         label.text = ""
         return label
     }()
+
+    private var aqiIcon = UIImageView()
 
     func configure(with model: DailyViewModel, and backgroundIndicator: Int) {
         self.model = model
@@ -140,14 +185,20 @@ class DailyViewCell: TableCell {
         dateLabel.text = model.date
         sunsetTimeLabel.text = model.sunset
         sunriseTimeLabel.text = model.sunrise
+        moonsetTimeLabel.text = model.moonset
+        moonriseTimeLabel.text = model.moonrise
         dayTempLabel.text = model.temperatures.day.asTemperatureString()
         nightTempLabel.text = model.temperatures.night.asTemperatureString()
         windIcon.image = UIImage(named: "Wind/\(model.windIcon)")
         windLabel.text = String(format: "%.0f", model.windSpeed * Settings.shared.speedMultiplier).appending(Settings.shared.speedUnit)
     }
 
+    func setAqiIcon(_ icon: String) {
+        aqiIcon.image = UIImage(named: "AQI/\(icon)")
+    }
+
     override func setupLayoutConstraints() {
-        contentView.addSubviews([weatherIcon, dateStackView, sunInfoStackView, tempStackView, windStackView])
+        contentView.addSubviews([weatherIcon, dateStackView, sunInfoStackView, moonInfoStackView, tempStackView, windStackView, aqiIcon])
 
         weatherIcon.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         weatherIcon.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
@@ -180,8 +231,28 @@ class DailyViewCell: TableCell {
         sunsetIcon.heightAnchor.constraint(equalToConstant: 25).isActive = true
         sunsetTimeLabel.sizeToFit()
 
-        tempStackView.leadingAnchor.constraint(equalTo: sunInfoStackView.trailingAnchor, constant: 10).isActive = true
-        tempStackView.centerYAnchor.constraint(equalTo: sunInfoStackView.centerYAnchor).isActive = true
+        moonInfoStackView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        moonInfoStackView.leadingAnchor.constraint(equalTo: sunInfoStackView.trailingAnchor, constant: 5).isActive = true
+
+        moonInfoStackView.addArrangedSubview(moonriseStackView)
+        moonInfoStackView.addArrangedSubview(moonsetStackView)
+
+        moonriseStackView.addArrangedSubview(moonriseIcon)
+        moonriseStackView.addArrangedSubview(moonriseTimeLabel)
+        moonriseIcon.translatesAutoresizingMaskIntoConstraints = false
+        moonriseIcon.widthAnchor.constraint(equalToConstant: 25).isActive = true
+        moonriseIcon.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        moonriseTimeLabel.sizeToFit()
+
+        moonsetStackView.addArrangedSubview(moonsetIcon)
+        moonsetStackView.addArrangedSubview(moonsetTimeLabel)
+        moonsetIcon.translatesAutoresizingMaskIntoConstraints = false
+        moonsetIcon.widthAnchor.constraint(equalToConstant: 25).isActive = true
+        moonsetIcon.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        moonsetTimeLabel.sizeToFit()
+
+        tempStackView.leadingAnchor.constraint(equalTo: moonInfoStackView.trailingAnchor, constant: 10).isActive = true
+        tempStackView.centerYAnchor.constraint(equalTo: moonInfoStackView.centerYAnchor).isActive = true
 
         tempStackView.addArrangedSubview(dayTempLabel)
         tempStackView.addArrangedSubview(nightTempLabel)
@@ -201,5 +272,10 @@ class DailyViewCell: TableCell {
         windIcon.translatesAutoresizingMaskIntoConstraints = false
         windIcon.widthAnchor.constraint(equalToConstant: 40).isActive = true
         windIcon.heightAnchor.constraint(equalToConstant: 40).isActive = true
+
+        aqiIcon.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
+        aqiIcon.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        aqiIcon.widthAnchor.constraint(equalToConstant: 25).isActive = true
+        aqiIcon.heightAnchor.constraint(equalToConstant: 25).isActive = true
     }
 }

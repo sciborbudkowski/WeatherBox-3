@@ -77,6 +77,10 @@ class MainViewController: UIViewController {
                    let aqiIcon = aqiIcons[aqiIndex] {
                     self?.customView.setAqiIcon(aqi: aqiIcon)
                 }
+
+                _ = aqi.list.map { detail in
+                    self?.dailyDataSource.aqis.append(aqiIcons[detail.main.aqi]!)
+                }
             }
             .store(in: &cancellables)
     }

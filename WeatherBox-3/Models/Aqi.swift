@@ -27,7 +27,7 @@ struct AqiComponents: Codable {
 
 struct Aqi: Request {
     typealias ReturnType = AqiModel
-    var path: String = "/data/2.5/air_pollution"
+    var path: String = "/data/2.5/air_pollution/forecast"
     var queryParams: [String : String]? = [:]
 
     var latitude: String

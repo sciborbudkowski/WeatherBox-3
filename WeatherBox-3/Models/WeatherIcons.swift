@@ -98,11 +98,3 @@ let moonIcons: [Int: String] = [
     6: "moon-last-quarter",
     7: "moon-waning-crescent"
 ]
-
-let aqiIcons: [Int: String] = [
-    1: "pm1",
-    2: "pm2",
-    3: "pm3",
-    4: "pm4",
-    5: "pm5"
-]

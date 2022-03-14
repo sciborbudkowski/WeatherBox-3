@@ -20,6 +20,7 @@ struct DailyViewModel {
 class DailyViewDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
 
     var items: [DailyViewModel] = []
+    var aqis: [String] = []
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
@@ -30,6 +31,7 @@ class DailyViewDataSource: NSObject, UITableViewDataSource, UITableViewDelegate 
             return UITableViewCell()
         }
         cell.configure(with: items[indexPath.row], and: indexPath.row)
+        cell.setAqiIcon(aqis[indexPath.row])
 
         return cell
     }
